@@ -1,2 +1,2 @@
-# sat-cicd
-Step-by-step guide on how to set up CI/CD pipelines among OpenShift Clusters Residing in Satellite or the Cloud.
+# Build CI/CD Pipeline across multiple Red Hat OpenShift Clusters
+This guide will focus on setting up the pipeline across different clusters on the Cloud and Satellite.
