@@ -1,0 +1,11 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: prod-pipeline
+  namespace: prod-env
+spec:
+  tasks:
+  - name: remote
+    taskRef:
+      kind: Task
+      name: remote
