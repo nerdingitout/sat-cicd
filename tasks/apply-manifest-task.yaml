@@ -1,0 +1,26 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: apply-manifests
+spec:
+  workspaces:
+  - name: source
+  params:
+    - name: manifest_dir
+      description: The directory in source that contains yaml manifests
+      type: string
+      default: "k8s"
+    - name: project-name
+      description: Name of the project to apply manifests
+      type: string
+      default: "dev-env"
+  steps:
+    - name: apply
+      image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+      workingDir: /workspace/source
+      command: ["/bin/bash", "-c"]
+      args:
+        - |-
+          echo Applying manifests in $(inputs.params.manifest_dir) directory
+          oc apply -f $(inputs.params.manifest_dir) -n $(inputs.params.project-name)
+          echo -----------------------------------
