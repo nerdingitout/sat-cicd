@@ -55,7 +55,7 @@ spec:
   - name: dev-apply-manifests
     params:
       - name: project-name
-        value: dev-env
+        value: prod-env
     runAfter:
       - build-image
     taskRef:
@@ -71,7 +71,7 @@ spec:
       - name: IMAGE
         value: $(params.IMAGE)
       - name: project-name
-        value: dev-env
+        value: prod-env
     runAfter:
       - dev-apply-manifests
     taskRef:
@@ -96,7 +96,7 @@ spec:
   - name: promote-stage
     params:
       - name: project-name
-        value: stage-env
+        value: prod-env
     runAfter:
       - test-task
     taskRef:
@@ -112,7 +112,7 @@ spec:
       - name: IMAGE
         value: $(params.IMAGE)
       - name: project-name
-        value: stage-env
+        value: prod-env
     runAfter:
       - promote-stage
     taskRef:
