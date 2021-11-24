@@ -90,7 +90,7 @@ spec:
   - name: promote-stage
     params:
       - name: project-name
-        value: stage-env
+        value: dev-env
     runAfter:
       - test-task
     taskRef:
@@ -106,7 +106,7 @@ spec:
       - name: IMAGE
         value: $(params.IMAGE)
       - name: project-name
-        value: stage-env
+        value: dev-env
     runAfter:
       - promote-stage
     taskRef:
