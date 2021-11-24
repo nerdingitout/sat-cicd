@@ -13,10 +13,10 @@ oc new-project prod-env
 oc create sa pipeline-starter -n prod-env
 ```
 ```
-oc create -f -n prod-env
+oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/location%20b/pipeline-starter-clusterrole.yaml?token=AIUPTYHYBEGHK63LTZTUYETBTZCF2 -n prod-env
 ```
 ```
-oc create -f -n prod-env
+oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/location%20b/pipeline-starter-rolebinding.yaml?token=AIUPTYFYKSXUPUBZE5LK36DBTZCJE -n prod-env
 ```
 - Obtain the ```pipeline-starter```authentication token
 ```
