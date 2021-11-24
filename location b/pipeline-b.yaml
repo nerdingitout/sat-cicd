@@ -32,7 +32,8 @@ spec:
         value: 'true'
       - name: revision
         value: $(params.git-revision)
-    runAfter: remote
+    runAfter:
+      - remote
     taskRef:
       kind: ClusterTask
       name: git-clone
