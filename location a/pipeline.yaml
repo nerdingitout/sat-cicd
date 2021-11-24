@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: dev-pipeline
+  namespace: dev-env
+spec:
+  tasks:
+  - name: execute-remote-pipeline
+    taskRef:
+      kind: Task
+      name: execute-remote-pipeline
+    params:
+    - name: pipeline-name
+      value: prod-pipeline
+    - name: pipeline-namespace
+      value: prod-env
+    - name: openshift-server-url
+      value: INSERT_OPENSHIFT_URL_HERE
+    - name: openshift-token-secret
+      value: pipeline-starter
