@@ -113,9 +113,6 @@ spec:
       kind: Task
       name: update-deployment
   - name: execute-remote-pipeline
-    taskRef:
-      kind: Task
-      name: execute-remote-pipeline
     params:
     - name: pipeline-name
       value: prod-pipeline
@@ -125,4 +122,8 @@ spec:
       value: INSERT_OPENSHIFT_URL_HERE
     - name: openshift-token-secret
       value: pipeline-starter
-    runAfter: update-deployment-stage
+    taskRef:
+      kind: Task
+      name: execute-remote-pipeline
+    runAfter:
+      - update-deployment-stage
