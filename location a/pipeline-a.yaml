@@ -67,7 +67,7 @@ spec:
       - name: project-name
         value: dev-env
     runAfter:
-      - dev-apply-manifests
+      - apply-manifests
     taskRef:
       kind: Task
       name: update-deployment
