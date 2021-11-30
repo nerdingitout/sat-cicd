@@ -1,9 +1,9 @@
 # Build CI/CD Pipeline across multiple Red Hat OpenShift Clusters
 This guide will focus on setting up the pipeline across different clusters on the Cloud and Satellite.
-### Architecture Diagram
+## Architecture Diagram
 ![sat](https://user-images.githubusercontent.com/36239840/144006939-4c3d94e8-5715-492f-9b6a-17a0a3733fb7.png)
 
-### Location B - Production Environment
+## Location B - Production Environment
 - Create ```prod-env``` project
 ```
 oc new-project prod-env
@@ -22,7 +22,7 @@ oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/locati
 ```
 oc sa get-token pipeline-starter -n prod-env
 ```
-#### Setting up the pipeline in Production Environment
+### Setting up the pipeline in Production Environment
 - Create tasks
 ```
 oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/location%20b/remote-task.yaml -n prod-env
@@ -38,7 +38,7 @@ oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/locati
 <br>From the Administrator perspective on the web console, go to storage and access PersistentVolumeClaims section. Click Create Persistent Volume Claim. Fill in the details as shown in the screenshot below.<br>
 ![image](https://user-images.githubusercontent.com/36239840/144010178-f6296011-7f0a-4fe9-b1ae-f7102b05a264.png)
 
-### Location A - Dev Environment
+## Location A - Dev Environment
 - Create ```dev-env``` project
 ```
 oc new-project dev-env
@@ -47,7 +47,7 @@ oc new-project dev-env
 ```
 oc create secret generic --from-literal=openshift-token=INSERT_TOKEN_HERE pipeline-starter -n dev-env
 ```
-#### Setting up the pipeline in Development Environment
+### Setting up the pipeline in Development Environment
 - Create tasks
 ```
 oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/location%20a/execute-remote-pipeline-task.yaml -n dev-env
@@ -80,7 +80,13 @@ oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/locati
     - name: openshift-token-secret
       value: pipeline-starter
  ```
-### Resources
+## Trigger the Pipeline
+- Run the following command to trigger the pipeline that starts from location A which in turn triggers the pipeline in location B. Make sure to change the values indicated below according to your project, pipeline and deployment details.
+```
+tkn pipeline start <pipeline-name> -w name=shared-workspace,ClaimName=source-pvc -p deployment-name=<deployment-name>
+    -p git-url=<git-url> -p IMAGE=image-registry.openshift-image-registry.svc:5000/<project-name>/<deployment-name> --use-param-defaults
+```
+## Resources
 - https://piotrminkowski.com/2021/08/05/kubernetes-ci-cd-with-tekton-and-argocd/
 - https://dzone.com/articles/cicd-pipeline-spanning-multiple-openshift-clusters
 - https://github.com/noseka1/execute-remote-pipeline
