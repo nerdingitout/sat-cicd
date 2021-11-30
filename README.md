@@ -22,7 +22,21 @@ oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/locati
 ```
 oc sa get-token pipeline-starter -n prod-env
 ```
-
+#### Setting up the pipeline in Production Environment
+- Create tasks
+```
+oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/location%20b/remote-task.yaml -n prod-env
+oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/tasks/apply-manifest-task.yaml -n prod-env
+oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/tasks/test-task.yaml -n prod-env
+oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/tasks/update-deployment-task.yaml -n prod-env
+```
+- Create Pipeline
+```
+oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/location%20b/pipeline-b.yaml -n prod-env
+```
+- Create PVC
+From the Administrator perspective on the web console, go to storage and access PersistentVolumeClaims section. Click Create Persistent Volume Claim. Fill in the details as shown in the screenshot below.
+![image](https://user-images.githubusercontent.com/36239840/144009663-35e70b43-0ee0-4b12-b1e4-04e7decd11f3.png)
 ### Location A - Dev Environment
 - Create ```dev-env``` project
 ```
@@ -32,7 +46,36 @@ oc new-project dev-env
 ```
 oc create secret generic --from-literal=openshift-token=INSERT_TOKEN_HERE pipeline-starter -n dev-env
 ```
-
+#### Setting up the pipeline in Development Environment
+- Create tasks
+```
+oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/location%20a/execute-remote-pipeline-task.yaml -n dev-env
+oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/tasks/apply-manifest-task.yaml -n dev-env
+oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/tasks/test-task.yaml -n dev-env
+oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/tasks/update-deployment-task.yaml -n dev-env
+```
+- Create Pipeline
+```
+oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/location%20a/pipeline-a.yaml -n dev-env
+```
+- Create PVC
+- Make sure to edit the ```openshift-server-url``` parameter in ```exectue-remote-pipeline``` task in the pipeline yaml (line 101). Add the remote cluster URL (Location B) to connect to it. (the following lines for reference)
+```
+- name: execute-remote-pipeline
+    params:
+    - name: APP_NAME
+      value: $(params.deployment-name)
+    - name: url
+      value: $(params.git-url)
+    - name: pipeline-name
+      value: prod-pipeline
+    - name: pipeline-namespace
+      value: prod-env
+    - name: openshift-server-url
+      value: INSERT_OPENSHIFT_URL_HERE
+    - name: openshift-token-secret
+      value: pipeline-starter
+ ```
 ### Resources
 - https://piotrminkowski.com/2021/08/05/kubernetes-ci-cd-with-tekton-and-argocd/
 - https://dzone.com/articles/cicd-pipeline-spanning-multiple-openshift-clusters
