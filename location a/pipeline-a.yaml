@@ -58,19 +58,6 @@ spec:
     workspaces:
       - name: source
         workspace: shared-workspace
-  - name: update-deployment
-    params:
-      - name: deployment
-        value: $(params.deployment-name)
-      - name: IMAGE
-        value: $(params.IMAGE)
-      - name: project-name
-        value: dev-env
-    runAfter:
-      - apply-manifests
-    taskRef:
-      kind: Task
-      name: update-deployment
   - name: test-task
     params:
       - name: APP_NAME
@@ -80,13 +67,26 @@ spec:
       - name: DEPLOY_PROJECT
         value: dev-env
     runAfter:
-      - update-deployment
+      - apply-manifests
     taskRef:
       kind: Task
       name: test-app
     workspaces:
       - name: source
         workspace: shared-workspace
+  - name: update-deployment
+    params:
+      - name: deployment
+        value: $(params.deployment-name)
+      - name: IMAGE
+        value: $(params.IMAGE)
+      - name: project-name
+        value: dev-env
+    runAfter:
+      - test-task
+    taskRef:
+      kind: Task
+      name: update-deployment
   - name: execute-remote-pipeline
     params:
     - name: APP_NAME
@@ -105,4 +105,4 @@ spec:
       kind: Task
       name: execute-remote-pipeline
     runAfter:
-      - test-task
+      - update-deployment
