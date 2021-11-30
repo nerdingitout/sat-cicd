@@ -4,18 +4,24 @@ metadata:
   name: execute-remote-pipeline
 spec:
   params:
-  - name: pipeline-name
-    type: string
-    description: Name of the pipeline to execute
-  - name: pipeline-namespace
-    type: string
-    description: Which namespace is the pipeline located in?
-  - name: openshift-server-url
-    type: string
-    description: URL of the remote OpenShift API server
-  - name: openshift-token-secret
-    type: string
-    description: Name of the secret holding the authentication token
+    - description: Name of the pipeline to execute
+      name: pipeline-name
+      type: string
+    - description: Which namespace is the pipeline located in?
+      name: pipeline-namespace
+      type: string
+    - description: URL of the remote OpenShift API server
+      name: openshift-server-url
+      type: string
+    - description: Name of the secret holding the authentication token
+      name: openshift-token-secret
+      type: string
+    - description: deployment name
+      name: APP_NAME
+      type: string
+    - description: git repo
+      name: url
+      type: string
   steps:
   - name: execute-remote-pipeline-step
     command:
@@ -36,9 +42,9 @@ spec:
 
       PIPELINERUN=$(
         tkn pipeline start \
-          --namespace $(params.pipeline-namespace) \
-          $(params.pipeline-name) \
-          | sed --quiet 's/Pipelinerun started: \(.*\)/\1/p'
+              --namespace $(params.pipeline-namespace) \
+              $(params.pipeline-name) -w name=shared-workspace,claimName=source-pvc -p deployment-name=$(params.APP_NAME) -p git-url=$(params.url) -p IMAGE=image-registry.openshift-image-registry.svc:5000/$(params.pipeline-namespace)/$(params.APP_NAME) --use-param-defaults \
+              | sed --quiet 's/Pipelinerun started: \(.*\)/\1/p'
       )
 
       tkn pipelinerun logs \
