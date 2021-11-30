@@ -35,8 +35,9 @@ oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/tasks/
 oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/location%20b/pipeline-b.yaml -n prod-env
 ```
 - Create PVC
-From the Administrator perspective on the web console, go to storage and access PersistentVolumeClaims section. Click Create Persistent Volume Claim. Fill in the details as shown in the screenshot below.
-![image](https://user-images.githubusercontent.com/36239840/144009663-35e70b43-0ee0-4b12-b1e4-04e7decd11f3.png)
+<br>From the Administrator perspective on the web console, go to storage and access PersistentVolumeClaims section. Click Create Persistent Volume Claim. Fill in the details as shown in the screenshot below.<br>
+![image](https://user-images.githubusercontent.com/36239840/144010178-f6296011-7f0a-4fe9-b1ae-f7102b05a264.png)
+
 ### Location A - Dev Environment
 - Create ```dev-env``` project
 ```
@@ -59,6 +60,9 @@ oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/tasks/
 oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/location%20a/pipeline-a.yaml -n dev-env
 ```
 - Create PVC
+<br>From the Administrator perspective on the web console, go to storage and access PersistentVolumeClaims section. Click Create Persistent Volume Claim. Fill in the details as shown in the screenshot below.<br>
+![image](https://user-images.githubusercontent.com/36239840/144009663-35e70b43-0ee0-4b12-b1e4-04e7decd11f3.png)
+
 - Make sure to edit the ```openshift-server-url``` parameter in ```exectue-remote-pipeline``` task in the pipeline yaml (line 101). Add the remote cluster URL (Location B) to connect to it. (the following lines for reference)
 ```
 - name: execute-remote-pipeline
