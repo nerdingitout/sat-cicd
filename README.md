@@ -1,5 +1,8 @@
 # Build CI/CD Pipeline across multiple Red Hat OpenShift Clusters
 This guide will focus on setting up the pipeline across different clusters on the Cloud and Satellite.
+## Prerequisites 
+- For each classic virtual server (worker nodes) for the openshift cluster, it should have minimum 4vCPU, 16 GB RAM, 3 disks (100 GB for boot, at least 25 GB for /var/data disk, a free unmounted and unpartitioned disk can be 100 GB).
+- Shared Storage for the pipeline. Check: <a href="https://cloud.ibm.com/docs/satellite?topic=satellite-config-storage-local-file">Setting up local file storage on Red Hat OpenShift on IBM Cloud Satellite>/a>
 ## Architecture Diagram
 ![sat](https://user-images.githubusercontent.com/36239840/144006939-4c3d94e8-5715-492f-9b6a-17a0a3733fb7.png)
 
@@ -91,3 +94,4 @@ tkn pipeline start <pipeline-name> -w name=shared-workspace,ClaimName=source-pvc
 - https://dzone.com/articles/cicd-pipeline-spanning-multiple-openshift-clusters
 - https://github.com/noseka1/execute-remote-pipeline
 - https://containerjournal.com/features/standardizing-multi-cloud-k8s-deployments-with-tekton/
+- https://cloud.ibm.com/docs/satellite?topic=satellite-hosts
