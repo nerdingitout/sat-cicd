@@ -89,6 +89,10 @@ spec:
         workspace: shared-workspace
   - name: execute-remote-pipeline
     params:
+    - name: APP_NAME
+      value: $(params.deployment-name)
+    - name: url
+      value: $(params.git-url)
     - name: pipeline-name
       value: prod-pipeline
     - name: pipeline-namespace
