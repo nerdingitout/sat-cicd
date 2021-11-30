@@ -20,10 +20,6 @@ spec:
   workspaces:
     - name: shared-workspace
   tasks:
-    - name: remote
-      taskRef:
-        kind: Task
-        name: remote
     - name: fetch-repository
       params:
         - name: url
@@ -32,8 +28,6 @@ spec:
           value: 'true'
         - name: revision
           value: $(params.git-revision)
-      runAfter:
-        - remote
       taskRef:
         kind: ClusterTask
         name: git-clone
