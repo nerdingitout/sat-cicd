@@ -1,7 +1,7 @@
 # Build CI/CD Pipeline across multiple Red Hat OpenShift Clusters
 This guide will focus on setting up the pipeline across different clusters on the Cloud and Satellite.
 ### Architecture Diagram
-![sat-cicd](https://user-images.githubusercontent.com/36239840/143217030-5801a6c1-8036-49dc-b51d-8ee8b01c413d.png)
+![sat](https://user-images.githubusercontent.com/36239840/144006939-4c3d94e8-5715-492f-9b6a-17a0a3733fb7.png)
 
 ### Location B - Production Environment
 - Create ```prod-env``` project
@@ -13,10 +13,10 @@ oc new-project prod-env
 oc create sa pipeline-starter -n prod-env
 ```
 ```
-oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/location%20b/pipeline-starter-clusterrole.yaml?token=AIUPTYHYBEGHK63LTZTUYETBTZCF2 -n prod-env
+oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/location%20b/pipeline-starter-clusterrole.yaml -n prod-env
 ```
 ```
-oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/location%20b/pipeline-starter-rolebinding.yaml?token=AIUPTYFYKSXUPUBZE5LK36DBTZCJE -n prod-env
+oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/location%20b/pipeline-starter-rolebinding.yaml -n prod-env
 ```
 - Obtain the ```pipeline-starter```authentication token
 ```
