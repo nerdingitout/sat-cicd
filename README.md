@@ -4,7 +4,7 @@ This guide will focus on setting up the pipeline across different clusters on th
 - For each classic virtual server (worker nodes) for the openshift cluster, it should have minimum 4vCPU, 16 GB RAM, 3 disks (100 GB for boot, at least 25 GB for /var/data disk, a free unmounted and unpartitioned disk can be 100 GB).
 - Shared Storage for the pipeline. Check: <a href="https://cloud.ibm.com/docs/satellite?topic=satellite-config-storage-local-file">Setting up local file storage on Red Hat OpenShift on IBM Cloud Satellite>/a>
 ## Architecture Diagram
-![sat](https://user-images.githubusercontent.com/36239840/144006939-4c3d94e8-5715-492f-9b6a-17a0a3733fb7.png)
+![sat](https://user-images.githubusercontent.com/36239840/144072701-4de95c75-9b9b-495f-8fb1-e40723ce4a93.png)
 
 ## Location B - Production Environment
 - Create ```prod-env``` project
