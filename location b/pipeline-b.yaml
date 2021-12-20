@@ -10,7 +10,7 @@ spec:
     - description: url of the git repo for the code of deployment
       name: git-url
       type: string
-    - default: master
+    - default: main
       description: revision to be used from repo of the code for deployment
       name: git-revision
       type: string
