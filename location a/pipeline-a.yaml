@@ -16,9 +16,6 @@ spec:
     type: string
     description: revision to be used from repo of the code for deployment
     default: "main"
-  - name: IMAGE
-    type: string
-    description: image to be build from the code
   tasks:
   - name: fetch-repository
     params:
@@ -37,7 +34,7 @@ spec:
   - name: build-image
     params:
       - name: IMAGE
-        value: $(params.IMAGE)
+        value: image-registry.openshift-image-registry.svc:5000/dev-env/$(params.deployment-name)
     runAfter:
       - fetch-repository
     taskRef:
@@ -79,7 +76,7 @@ spec:
       - name: deployment
         value: $(params.deployment-name)
       - name: IMAGE
-        value: $(params.IMAGE)
+        value: image-registry.openshift-image-registry.svc:5000/dev-env/$(params.deployment-name)
       - name: project-name
         value: dev-env
     runAfter:
