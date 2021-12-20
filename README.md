@@ -87,7 +87,16 @@ oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/locati
 - Run the following command to trigger the pipeline that starts from location A which in turn triggers the pipeline in location B. Make sure to change the values indicated below according to your project, pipeline and deployment details.
 ```
 tkn pipeline start <pipeline-name> -w name=shared-workspace,ClaimName=source-pvc -p deployment-name=<deployment-name>
-    -p git-url=<git-url> -p IMAGE=image-registry.openshift-image-registry.svc:5000/<project-name>/<deployment-name> --use-param-defaults
+    -p git-url=<git-url> --use-param-defaults
+```
+## Connect to Postgres DB
+- This step is to be applied once and only for the backend application <a href="https://github.com/nerdingitout/form-bff">form bff</a>. Make sure to connect to your postgres database by creating a secret in each environment using the following command. Make sure to replace the values wit the right credentials for each variable. Leave port 8080 as is.<br>
+```
+oc create secret generic postgredb-secret --from-literal=DB_USER=<add-db-user-here> --from-literal=DB_PASSWORD=<add-db-password-here> --from-literal=DB_HOST=<add-db-host-here> --from-literal=DB_PORT=<add-db-port-here> --from-literal=DB_NAME=<add-db-name-here> --from-literal=PORT=8080
+```
+- Then set the secret you create as environment variable for your application<br>
+```
+oc set env --from=secret/postgredb-secret deployment/form-bff
 ```
 ## Resources
 - https://piotrminkowski.com/2021/08/05/kubernetes-ci-cd-with-tekton-and-argocd/
