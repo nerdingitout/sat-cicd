@@ -1,8 +1,20 @@
 # Build CI/CD Pipeline across multiple Red Hat OpenShift Clusters
 This guide will focus on setting up the pipeline across different clusters on the Cloud and Satellite.
-## Prerequisites 
+## Content
+
+- <a href="https://github.com/nerdingitout/sat-cicd#prerequisites">Prerequisites</a>
+- <a href="https://github.com/nerdingitout/sat-cicd#architecture-diagram">Architecture Diagram</a>
+- <a href="https://github.com/nerdingitout/sat-cicd#location-b---production-environment">Location B - Production Environment</a>
+    - <a href="https://github.com/nerdingitout/sat-cicd#setting-up-the-pipeline-in-production-environment">Setting up the pipeline in Production Environment</a>
+- <a href="https://github.com/nerdingitout/sat-cicd#location-a---dev-environment">Location A - Dev Environment</a>
+    - <a href="https://github.com/nerdingitout/sat-cicd#setting-up-the-pipeline-in-development-environment">Setting up the pipeline in Development Environment</a>
+- <a href="https://github.com/nerdingitout/sat-cicd#trigger-the-pipeline#">Trigger the Pipeline</a>
+- <a href="https://github.com/nerdingitout/sat-cicd#connect-to-postgres-db">Connect to Postgres DB</a>
+- <a href="https://github.com/nerdingitout/sat-cicd#resources">Resources</a>
+## Prerequisites
 - For each classic virtual server (worker nodes) for the openshift cluster, it should have minimum 4vCPU, 16 GB RAM, 3 disks (100 GB for boot, at least 25 GB for /var/data disk, a free unmounted and unpartitioned disk can be 100 GB).
 - Shared Storage for the pipeline. Check: <a href="https://cloud.ibm.com/docs/satellite?topic=satellite-config-storage-local-file">Setting up local file storage on Red Hat OpenShift on IBM Cloud Satellite</a>
+- <a href="https://cloud.ibm.com/docs/openshift?topic=openshift-registry">Set up Image Registry for Red Hat OpenShift Cluster on IBM Cloud Satellite</a>
 ## Architecture Diagram
 ![sat](https://user-images.githubusercontent.com/36239840/144072701-4de95c75-9b9b-495f-8fb1-e40723ce4a93.png)
 
