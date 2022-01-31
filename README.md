@@ -25,6 +25,8 @@ oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/locati
 ```
 oc sa get-token pipeline-starter -n prod-env
 ```
+- Get the server URL from OpenShift cluster Overview page, copy the Cluster service URL from the Networking section and save it <a href="https://github.com/nerdingitout/sat-cicd#:~:text=Make%20sure%20to%20edit%20the%20openshift%2Dserver%2Durl%20parameter%20in%20exectue%2Dremote%2Dpipeline%20task%20in%20the%20pipeline%20yaml%20(line%20101).%20Add%20the%20remote%20cluster%20URL%20(Location%20B)%20to%20connect%20to%20it.%20(the%20following%20lines%20for%20reference">  to use it at a later step when editing the pipeline</a>
+
 ### Setting up the pipeline in Production Environment
 - Create tasks
 ```
