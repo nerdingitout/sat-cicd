@@ -22,6 +22,9 @@ spec:
     - description: git repo
       name: url
       type: string
+    - description: git revision
+      name: revision
+      type: string
   steps:
   - name: execute-remote-pipeline-step
     command:
@@ -43,7 +46,7 @@ spec:
       PIPELINERUN=$(
         tkn pipeline start \
               --namespace $(params.pipeline-namespace) \
-              $(params.pipeline-name) -w name=shared-workspace,claimName=source-pvc -p deployment-name=$(params.APP_NAME) -p git-url=$(params.url) -p IMAGE=image-registry.openshift-image-registry.svc:5000/$(params.pipeline-namespace)/$(params.APP_NAME) --use-param-defaults \
+              $(params.pipeline-name) -w name=shared-workspace,claimName=source-pvc -p deployment-name=$(params.APP_NAME) -p git-url=$(params.url) -p git-revision=$(params.revision) -p IMAGE=image-registry.openshift-image-registry.svc:5000/$(params.pipeline-namespace)/$(params.APP_NAME) --use-param-defaults \
               | sed --quiet 's/Pipelinerun started: \(.*\)/\1/p'
       )
 
