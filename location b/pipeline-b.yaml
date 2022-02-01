@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: final-prod-pipeline
+  name: prod-pipeline
 spec:
   params:
     - description: name of the deployment to be patched
