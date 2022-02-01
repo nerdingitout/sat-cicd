@@ -42,7 +42,6 @@ oc sa get-token pipeline-starter -n prod-env
 ### Setting up the pipeline in Production Environment
 - Create tasks
 ```
-oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/location%20b/remote-task.yaml -n prod-env
 oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/tasks/apply-manifest-task.yaml -n prod-env
 oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/tasks/test-task.yaml -n prod-env
 oc create -f https://raw.githubusercontent.com/nerdingitout/sat-cicd/main/tasks/update-deployment-task.yaml -n prod-env
