@@ -90,6 +90,8 @@ spec:
       value: $(params.deployment-name)
     - name: url
       value: $(params.git-url)
+    - name: revision
+      value: $(params.git-revision)
     - name: pipeline-name
       value: prod-pipeline
     - name: pipeline-namespace
