@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: prod-pipeline
+  name: final-prod-pipeline
 spec:
   params:
     - description: name of the deployment to be patched
@@ -58,6 +58,22 @@ spec:
       workspaces:
         - name: source
           workspace: shared-workspace
+    - name: test-task
+      params:
+        - name: APP_NAME
+          value: $(params.deployment-name)
+        - name: APP_VERSION
+          value: '1.0'
+        - name: DEPLOY_PROJECT
+          value: prod-env
+      runAfter:
+        - apply-manifests
+      taskRef:
+        kind: Task
+        name: test-app
+      workspaces:
+        - name: source
+          workspace: shared-workspace
     - name: update-deployment
       params:
         - name: deployment
@@ -67,7 +83,7 @@ spec:
         - name: project-name
           value: prod-env
       runAfter:
-        - apply-manifests
+        - test-task
       taskRef:
         kind: Task
         name: update-deployment
